@@ -1,0 +1,735 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API documentation for the accounting backend service",
+    "version": "1.0.0",
+    "title": "Order Management API",
+    "termsOfService": "http://dev.quabbly.com/terms/",
+    "contact": {
+      "email": "team@photizzo.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "p-ordermanagement-api-dev.quabbly.com",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "Order Management",
+      "description": "create order"
+    },
+    {
+      "name": "User Management",
+      "description": "create user"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/order": {
+      "post": {
+        "tags": [
+          "Order Management"
+        ],
+        "summary": "Place an order",
+        "description": "",
+        "operationId": "createOrder",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An order placed by customers",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/CreateOrderSuccess"
+            }
+          },
+          "400": {
+            "description": "FAILED_VALIDATION"
+          },
+          "500": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/order/:orderId": {
+      "put": {
+        "tags": [
+          "Order Management"
+        ],
+        "summary": "Place an order",
+        "description": "",
+        "operationId": "updateOrder",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An order placed by customers",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/CreateOrderSuccess"
+            }
+          },
+          "400": {
+            "description": "FAILED_VALIDATION"
+          },
+          "500": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/order/paid": {
+      "get": {
+        "tags": [
+          "Order Management"
+        ],
+        "summary": "List of all orders",
+        "description": "",
+        "operationId": "listOrders",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateOrderSuccess"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Register a new user",
+        "description": "",
+        "operationId": "createUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An account created by a user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/CreateUserSuccess"
+            }
+          },
+          "400": {
+            "description": "FAILED_VALIDATION"
+          },
+          "500": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/auth/users": {
+      "get": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "List of all users",
+        "description": "",
+        "operationId": "listUsers",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/CreateUserSuccess"
+            }
+          },
+          "400": {
+            "description": "FAILED_VALIDATION"
+          },
+          "500": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/auth/confirmation": {
+      "post": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Confirm user",
+        "description": "",
+        "operationId": "confirmUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An account to be confirmed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfirmUser"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/ConfirmUserSuccess"
+            }
+          },
+          "400": {
+            "description": "FAILED_VALIDATION"
+          },
+          "500": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/auth/resend": {
+      "post": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Confirm user",
+        "description": "",
+        "operationId": "resendLink",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An account to be confirmed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResendLink"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/ResendLinkSuccess"
+            }
+          },
+          "400": {
+            "description": "FAILED_VALIDATION"
+          },
+          "500": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/auth/reset_password": {
+      "post": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Confirm user",
+        "description": "",
+        "operationId": "forgotPassword",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An account to be confirmed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetPassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordSuccess"
+            }
+          },
+          "400": {
+            "description": "FAILED_VALIDATION"
+          },
+          "500": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/auth/send_link": {
+      "post": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Confirm user",
+        "description": "",
+        "operationId": "sendResetPasswordLink",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An account to be confirmed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordLink"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCESS",
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordLinkSuccess"
+            }
+          },
+          "400": {
+            "description": "FAILED_VALIDATION"
+          },
+          "500": {
+            "description": "ERROR"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "User Management"
+        ],
+        "summary": "User login",
+        "description": "",
+        "operationId": "loginUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An account created by a user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateUserSuccess"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Order": {
+      "type": "object",
+      "properties": {
+        "productType": {
+          "type": "string",
+          "example": "Usesries or Sseries"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "jason"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "jason"
+        },
+        "phonenumber": {
+          "type": "string",
+          "example": "081234567898"
+        },
+        "email": {
+          "type": "string",
+          "example": "fredjason@quabbly.com"
+        },
+        "address": {
+          "type": "string",
+          "example": "12 Iweka road Onitsha"
+        },
+        "numberOfItems": {
+          "type": "number",
+          "example": 5
+        },
+        "callbackUrl": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "example": "Lagos"
+        },
+        "city": {
+          "type": "string",
+          "example": "Ikeja"
+        }
+      }
+    },
+    "CreateOrderSuccess": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "example": "2019-01-13T23:33:21.586Z"
+        },
+        "_id": {
+          "type": "string",
+          "example": "5c3bcfc1eb99dd0010d335fe"
+        },
+        "productType": {
+          "type": "string",
+          "example": "Usesries or Sseries"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "fred"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "jason"
+        },
+        "phonenumber": {
+          "type": "string",
+          "example": "081234567898"
+        },
+        "email": {
+          "type": "string",
+          "example": "fredjason@quabbly.com"
+        },
+        "address": {
+          "type": "string",
+          "example": "12 Iweka road Onitsha"
+        },
+        "numberOfItems": {
+          "type": "number",
+          "example": 5
+        },
+        "unitCost": {
+          "type": "number",
+          "example": "38,000"
+        },
+        "trxRef": {
+          "type": "string",
+          "example": "trxRef1234"
+        },
+        "amount": {
+          "type": "number",
+          "example": "190,000"
+        },
+        "state": {
+          "type": "string",
+          "example": "Lagos"
+        },
+        "city": {
+          "type": "string",
+          "example": "Ikeja"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "fred"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "jason"
+        },
+        "Phonenumber": {
+          "type": "number",
+          "example": "081234567898"
+        },
+        "email": {
+          "type": "string",
+          "example": "fredjason@quabbly.com"
+        },
+        "password": {
+          "type": "string",
+          "example": 12345678
+        }
+      }
+    },
+    "CreateUserSuccess": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "example": "2019-01-13T23:33:21.586Z"
+        },
+        "_id": {
+          "type": "string",
+          "example": "5c3bcfc1eb99dd0010d335fe"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "fred"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "jason"
+        },
+        "Phonenumber": {
+          "type": "number",
+          "example": "081234567898"
+        },
+        "email": {
+          "type": "string",
+          "example": "fredjason@quabbly.com"
+        },
+        "password": {
+          "type": "string",
+          "example": 12345678
+        }
+      }
+    },
+    "UserLogin": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "example": "fredjason@quabbly.com"
+        },
+        "password": {
+          "type": "string",
+          "example": 12345678
+        }
+      }
+    },
+    "ConfirmUser": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "wfhiowehfioehio5hsfhhw3652433eqwdasdjasdabojbsdffe"
+        }
+      }
+    },
+    "ConfirmUserSuccess": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "example": "2019-01-13T23:33:21.586Z"
+        },
+        "_id": {
+          "type": "string",
+          "example": "5c3bcfc1eb99dd0010d335fe"
+        },
+        "token": {
+          "type": "string",
+          "example": "wfhiowehfioehio5hsfhhw3652433eqwdasdjasdabojbsdffe"
+        }
+      }
+    },
+    "ResendLink": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "fredjason@quabbly.com"
+        }
+      }
+    },
+    "ResendLinkSuccess": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "example": "2019-01-13T23:33:21.586Z"
+        },
+        "_id": {
+          "type": "string",
+          "example": "5c3bcfc1eb99dd0010d335fe"
+        },
+        "email": {
+          "type": "string",
+          "example": "fredjason@quabbly.com"
+        }
+      }
+    },
+    "ResetPassword": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "5c3bcfc1eb99dd0010d335fe"
+        },
+        "password": {
+          "type": "string",
+          "example": 1234567
+        }
+      }
+    },
+    "ResetPasswordSuccess": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "example": "2019-01-13T23:33:21.586Z"
+        },
+        "_id": {
+          "type": "string",
+          "example": "5c3bcfc1eb99dd0010d335fe"
+        }
+      }
+    },
+    "ResetPasswordLink": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "fredjason@quabbly.com"
+        },
+        "baseURL": {
+          "type": "string",
+          "example": "http://dev.quabbly.com/terms/"
+        }
+      }
+    },
+    "ResetPasswordLinkSuccess": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "example": "2019-01-13T23:33:21.586Z"
+        },
+        "_id": {
+          "type": "string",
+          "example": "5c3bcfc1eb99dd0010d335fe"
+        },
+        "email": {
+          "type": "string",
+          "example": "fredjason@quabbly.com"
+        },
+        "baseURL": {
+          "type": "string",
+          "example": "http://dev.quabbly.com/terms/"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
