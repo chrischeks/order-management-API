@@ -21,7 +21,7 @@
     "@types/jsonwebtoken": "^7.2.8",
     "@types/nodemailer": "^4.6.2",
     "@types/uuid": "^3.4.4",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "chai-http": "^4.2.1",
